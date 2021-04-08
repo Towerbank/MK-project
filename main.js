@@ -3,50 +3,50 @@ const scorpion = {
   hp: 80,
   img: 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif',
   weapon: 'kunai',
-    attack: function() {
-    console.log(player2.name + ' ' + 'Fight...')
+  attack: function () {
+    console.log(scorpion.name + ' ' + 'Fight...')
   }
-}
+};
 
 const kitana = {
   name: 'KITANA',
   hp: 100,
   img: 'http://reactmarathon-api.herokuapp.com/assets/kitana.gif',
   weapon: 'kunai',
-    attack: function() {
-    console.log(player2.name + ' ' + 'Fight...')
+  attack: function () {
+    console.log(kitana.name + ' ' + 'Fight...')
   }
-}
+};
 
 const liukang = {
   name: 'LIUKANG',
   hp: 100,
   img: 'http://reactmarathon-api.herokuapp.com/assets/liukang.gif',
   weapon: 'kunai',
-    attack: function() {
-    console.log(player2.name + ' ' + 'Fight...')
+  attack: function () {
+    console.log(liukang.name + ' ' + 'Fight...')
   }
-}
+};
 
 const sonya = {
   name: 'SONYA',
   hp: 100,
   img: 'http://reactmarathon-api.herokuapp.com/assets/sonya.gif',
   weapon: 'kunai',
-    attack: function() {
-    console.log(player2.name + ' ' + 'Fight...')
+  attack: function () {
+    console.log(sonya.name + ' ' + 'Fight...')
   }
-}
+};
 
 const subzero = {
   name: 'SUB-ZERO',
   hp: 50,
   img: 'http://reactmarathon-api.herokuapp.com/assets/subzero.gif',
   weapon: 'kunai',
-    attack: function() {
-    console.log(player2.name + ' ' + 'Fight...')
+  attack: function () {
+    console.log(subzero.name + ' ' + 'Fight...')
   }
-}
+};
 
 
 createPlayer = function (player, char) {
