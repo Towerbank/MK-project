@@ -1,14 +1,19 @@
+const $arenas = document.querySelector('.arenas');
+const $randomButton = document.querySelector('.button');
+
 const scorpion = {
+  player: 1,
   name: 'SCORPION',
-  hp: 80,
+  hp: 100,
   img: 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif',
   weapon: 'kunai',
-  attack: function () {
+  attack: function () { 
     console.log(scorpion.name + ' ' + 'Fight...')
   }
 };
 
 const kitana = {
+  player: 1,
   name: 'KITANA',
   hp: 100,
   img: 'http://reactmarathon-api.herokuapp.com/assets/kitana.gif',
@@ -19,6 +24,7 @@ const kitana = {
 };
 
 const liukang = {
+  player: 2,
   name: 'LIUKANG',
   hp: 100,
   img: 'http://reactmarathon-api.herokuapp.com/assets/liukang.gif',
@@ -29,6 +35,7 @@ const liukang = {
 };
 
 const sonya = {
+  player: 2,
   name: 'SONYA',
   hp: 100,
   img: 'http://reactmarathon-api.herokuapp.com/assets/sonya.gif',
@@ -39,8 +46,9 @@ const sonya = {
 };
 
 const subzero = {
+  player: 2,
   name: 'SUB-ZERO',
-  hp: 50,
+  hp: 100,
   img: 'http://reactmarathon-api.herokuapp.com/assets/subzero.gif',
   weapon: 'kunai',
   attack: function () {
@@ -49,46 +57,69 @@ const subzero = {
 };
 
 
-createPlayer = function (player, char) {
+createElement = function (tag, className) {
+  const $tag = document.createElement(tag);
+  if (className) {
+    $tag.classList.add(className);
+  }
   
-  const $player = document.createElement('div');
-  $player.classList.add(player);
+  return $tag;
+}
 
-  const $progressbar = document.createElement('div');
-  $progressbar.classList.add('progressbar');
+createPlayer = function (char) {
+  
+  const $player = createElement('div', 'player' + char.player);
+  const $progressbar = createElement('div', 'progressbar');
 
-  const $life = document.createElement('div');
-  $life.classList.add('life');
+  const $life = createElement('div', 'life');
   $life.style.width = (char.hp+'%');
 
-  const $name = document.createElement('div');
-  $name.classList.add('name');
+  const $name = createElement('div', 'name'); 
   $name.innerText = char.name;
 
   $progressbar.appendChild($life);
   $progressbar.appendChild($name);
 
-  const $character = document.createElement('div');
-  $character.classList.add('character');
-
-  const $img = document.createElement('img');
+  const $character = createElement('div', 'character');
+  
+  const $img = createElement('img');
   $img.src = char.img;
 
   $character.appendChild($img);
   $player.appendChild($progressbar);
   $player.appendChild($character);
 
-  const $arenas = document.querySelector('.arenas');
-  $arenas.appendChild($player);
+ return $player;
 }
 
-createPlayer('player1', scorpion);
-createPlayer('player2', subzero);
+changeHP = function (player) {
+  const $playerLife = document.querySelector('.player'+ player.player +' .life');
+  player.hp -= Math.ceil(Math.random() * 20);
+  $playerLife.style.width = player.hp + '%';
+
+  if (player.hp <= 0) {
+    $playerLife.style.width = 0 + '%';
+    $randomButton.disabled = true;
+    if (scorpion.hp > sonya.hp) {
+    $arenas.appendChild(playerLose(scorpion.name));
+      } else {
+      $arenas.appendChild(playerLose(sonya.name));
+    }
+  }
+}
+
+playerLose = function (name) {
+  const $loseTitle = createElement('div', 'loseTitle');
+  $loseTitle.innerText = name + ' wins';
+  return $loseTitle;
+}
+
+$randomButton.addEventListener('click', function () {
+  changeHP(scorpion);
+  changeHP(sonya);
+})
+
+$arenas.appendChild(createPlayer(scorpion));
+$arenas.appendChild(createPlayer(sonya));
 
 
-
-// - http://reactmarathon-api.herokuapp.com/assets/scorpion.gif
-// - http://reactmarathon-api.herokuapp.com/assets/kitana.gif
-// - http://reactmarathon-api.herokuapp.com/assets/liukang.gif
-// - http://reactmarathon-api.herokuapp.com/assets/sonya.gif
-// - http://reactmarathon-api.herokuapp.com/assets/subzero.gif
