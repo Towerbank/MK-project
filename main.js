@@ -94,11 +94,11 @@ createPlayer = function (char) {
 
 changeHP = function (player) {
   const $playerLife = document.querySelector('.player'+ player.player +' .life');
-  player.hp -= Math.ceil(Math.random() * 20);
-  $playerLife.style.width = player.hp + '%';
-
+  $playerLife.style.width = (player.hp -= Math.ceil(Math.random() * 20)) + '%';
+  
   if (player.hp <= 0) {
-    $playerLife.style.width = 0 + '%';
+    player.hp = 0;
+    $playerLife.style.width = player.hp + '%';
     $randomButton.disabled = true;
     if (scorpion.hp > sonya.hp) {
     $arenas.appendChild(playerLose(scorpion.name));
